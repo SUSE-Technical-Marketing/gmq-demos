@@ -1,0 +1,32 @@
+defaultNamespace: ollama
+helm:
+  chart: oci://dp.apps.rancher.io/charts/ollama
+  releaseName: ollama
+  version: "1.55.0"
+  values:
+    global:
+      imagePullSecrets: ["application-collection"]
+    ollama:
+      gpu:
+        # -- Enable GPU integration
+        enabled: true
+
+        # -- GPU type: 'nvidia' or 'amd'
+        type: 'nvidia'
+
+        # -- Specify the number of GPU to 1
+        number: 1
+      models:
+        pull:
+          - name: "gemma4:latest"
+overrideTargets:
+  - clusterSelector:
+      matchLabels:
+         capability-gpu: "nvidia"
+dependsOn:
+  - selector:
+      matchLabels:
+        provides: nvidia-gpu-operator
+
+labels:
+  provides: ollama
