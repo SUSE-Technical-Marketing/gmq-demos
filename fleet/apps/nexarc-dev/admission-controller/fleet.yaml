@@ -10,3 +10,15 @@ overrideTargets:
   - clusterSelector:
       matchLabels:
          needs-admission-controller: "true"
+diff:
+  comparePatches:
+  - apiVersion: admissionregistration.k8s.io/v1
+    kind: ValidatingWebhookConfiguration
+    name: kubewarden-mutating-webhook-configuration
+    operations:
+    - {"op": "remove", "path":"/webhooks/0"}
+  - apiVersion: admissionregistration.k8s.io/v1
+    kind: MutatingWebhookConfiguration
+    name: kubewarden-mutating-webhook-configuration
+    operations:
+    - {"op": "remove", "path":"/webhooks/0"}
