@@ -1,0 +1,11 @@
+defaultNamespace: kubewarden
+helm:
+  chart: oci://dp.apps.rancher.io/charts/suse-security-admission-controller
+  version: "0.8.0"
+  values:
+    global:
+      imagePullSecrets: ["application-collection"]
+overrideTargets:
+  - clusterSelector:
+      matchLabels:
+         needs-admission-controller: "true"
