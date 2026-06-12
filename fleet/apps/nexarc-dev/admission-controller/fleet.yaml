@@ -1,6 +1,7 @@
 defaultNamespace: kubewarden
 helm:
   chart: oci://dp.apps.rancher.io/charts/suse-security-admission-controller
+  releaseName: kubewarden
   version: "0.8.0"
   values:
     global:
